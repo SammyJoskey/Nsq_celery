@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Results</title>
+  </head>
+  <body>
+
+{% for result in results %}
+<TR>
+   <TD class="c2">{{result.address}}</TD>
+   <TD class="c3">{{result.words_count}}</TD>
+   <TD class="c4"><SPAN>{{result.http_status_code}}</SPAN></TD>
+</TR>
+
+</body>
+</html>

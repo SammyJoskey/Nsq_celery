@@ -1,0 +1,17 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+      <title>Form</title>
+  </head>
+  <body>
+<div class="formwrapper">
+  <h2 class="title">Check the website</h2>
+  <form method="POST" action="/add">
+  {{ form.csrf_token }}
+      <div class="form-field">{{ form.address.label }} {{ form.address(size=300)}}</div>
+      <input type="submit" value="Go">
+      {{ form.submit }}
+  </form>
+</div>
+</body>
+</html>
