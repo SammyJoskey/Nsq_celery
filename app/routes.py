@@ -7,7 +7,7 @@ from .forms import WebsiteForm
 
 
 @celery.task
-def parse_website_text(_id):
+def parse_website(_id):
     task = Tasks.query.get(_id)
     task.task_status = 'PENDING'
     db.session.commit()
@@ -29,7 +29,7 @@ def parse_website_text(_id):
 
 
 @app.route('/', methods=['POST', 'GET'])
-@app.route('/add', methods=['POST', 'GET'])
+@app.route('/add_website', methods=['POST', 'GET'])
 def website():
     website_form = WebsiteForm()
     if request.method == 'POST':
@@ -38,11 +38,11 @@ def website():
             task = Tasks(address=address, timestamp=datetime.now(), task_status='NOT_STARTED')
             db.session.add(task)
             db.session.commit()
-            parse_website_text.delay(task._id)
-            return redirect('/')
+            parse_website.delay(task._id)
+            return redirect('/results')
         error = "Form was not validated"
         return render_template('error.html',form=website_form,error = error)
-    return render_template('add.html', form=website_form)
+    return render_template('add_website.html', form=website_form)
 
 
 @app.route('/results')
