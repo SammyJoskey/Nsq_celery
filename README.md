@@ -9,7 +9,7 @@
 2. Запускаем redis:
 * docker run -d -p 6379:6379 redis
 3. Запускаем flask
-* gunicorn -w 4 -b 0.0.0.0:5000 app:app
+* flask run
 4. Запускаем celery
 * celery worker -A app.celery
 
